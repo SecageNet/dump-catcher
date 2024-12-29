@@ -97,7 +97,7 @@ phrases = {
     }
 }
 
-lang = locale.getdefaultlocale()[0]
+lang = locale.getlocale()[0]
 lang = 'tr' if lang == "tr_TR" else 'en'
 
 def phrase(key):
