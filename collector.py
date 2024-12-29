@@ -8,7 +8,6 @@ import sys
 import locale
 
 TEMP_DIR = path.expanduser("~") + "\\AppData\\Local\\Temp\\Raporlar"
-REPORT_ZIP = "Raporlar.zip"
 
 phrases = {
     'welcome': {
@@ -102,6 +101,8 @@ lang = 'tr' if lang == "tr_TR" else 'en'
 
 def phrase(key):
     return phrases[key][lang]
+
+REPORT_ZIP = phrase('report_filename')
 
 def run_subprocess(command):
     subprocess.run(command, shell=True, check=True)
