@@ -1,6 +1,6 @@
-# Dump Catcher
+# System Information Collector
 
-Dump Catcher is a tool used to obtain minidump files and a few additional files. This tool facilitates debugging and analyzing system crashes. All the information obtained by the program is listed below.
+System Information Collector is a tool used to obtain minidump files and a few additional files. This tool facilitates debugging and analyzing system crashes. All the information obtained by the program is listed below.
 
 ## Information Obtained by the Program
 
