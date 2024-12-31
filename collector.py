@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import sys
 import locale
 
-TEMP_DIR = path.expanduser("~") + "\\AppData\\Local\\Temp\\SecageReports"
+TEMP_DIR = path.expanduser("~") + "\\AppData\\Local\\Temp\\SystemInformationReports"
 
 phrases = {
     'welcome': {
