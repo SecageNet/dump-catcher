@@ -96,8 +96,10 @@ phrases = {
     }
 }
 
+turkeyName = ["tr_TR", "Turkish_Turkey", "Turkish_Türkiye"]
+
 lang = locale.getlocale()[0]
-lang = 'tr' if lang == "tr_TR" else 'en'
+lang = 'tr' if lang in turkeyName else 'en'
 
 def phrase(key):
     return phrases[key][lang]
