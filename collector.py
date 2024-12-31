@@ -7,7 +7,7 @@ from concurrent.futures import ThreadPoolExecutor
 import sys
 import locale
 
-TEMP_DIR = path.expanduser("~") + "\\AppData\\Local\\Temp\\Raporlar"
+TEMP_DIR = path.expanduser("~") + "\\AppData\\Local\\Temp\\SecageReports"
 
 phrases = {
     'welcome': {
@@ -120,7 +120,6 @@ def custom_pause(message):
             break
 
 def compress_and_clean(temp_dir, output_name):
-    """Compresses collected files and cleans up the temporary directory."""
     print(phrase('compressing'))
     shutil.make_archive(path.expanduser("~") + f"\\Desktop\\{output_name.replace('.zip', '')}", "zip", temp_dir)
     shutil.rmtree(temp_dir)
