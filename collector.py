@@ -121,7 +121,8 @@ def custom_pause(message):
 
 def compress_and_clean(temp_dir, output_name):
     print(phrase('compressing'))
-    shutil.make_archive(path.expanduser("~") + f"\\Desktop\\{output_name.replace('.zip', '')}", "zip", temp_dir)
+    output_path = path.join(path.expanduser("~"),"Desktop",output_name.replace('.zip', ''))
+    shutil.make_archive(output_path, "zip", temp_dir)
     shutil.rmtree(temp_dir)
     print(phrase('compression_complete'))
 
