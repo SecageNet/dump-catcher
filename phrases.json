@@ -28,8 +28,8 @@
         "en": "\nFiles are being compressed..."
     },
     "compression_complete": {
-        "tr": "\nDosyalar sıkıştırıldı ve ZIP dosyası masaüstüne \"Raporlar.zip\" şeklinde kaydedildi.",
-        "en": "\nFiles compressed and the ZIP file was saved to the desktop as \"Reports.zip\"."
+        "tr": "\nDosyalar sıkıştırıldı ve ZIP dosyası masaüstüne \"{filename}\" şeklinde kaydedildi.",
+        "en": "\nFiles compressed and the ZIP file was saved to the desktop as \"{filename}\"."
     },
     "advanced_mode": {
         "tr": "\nGelişmiş Mod seçildi.",

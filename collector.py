@@ -21,8 +21,11 @@ turkeyName = ["tr_TR", "Turkish_Turkey", "Turkish_Türkiye"]
 lang = locale.getlocale()[0]
 lang = 'tr' if lang in turkeyName else 'en'
 
-def phrase(key):
-    return phrases[key][lang]
+def phrase(key, **kwargs):
+    message = phrases[key][lang]
+    if kwargs:
+        message = message.format(**kwargs)
+    return message
 
 REPORT_ZIP = phrase('report_filename')
 
@@ -39,12 +42,23 @@ def custom_pause(message):
         else:
             break
 
+def get_unique_filename(directory, filename):
+    base, ext = path.splitext(filename)
+    counter = 1
+    unique_filename = filename
+    while path.exists(path.join(directory, unique_filename)):
+        unique_filename = f"{base}_{counter}{ext}"
+        counter += 1
+    return unique_filename
+
 def compress_and_clean(temp_dir, output_name):
     print(phrase('compressing'))
-    output_path = path.join(path.expanduser("~"),"Desktop",output_name.replace('.zip', ''))
+    desktop_path = path.join(path.expanduser("~"), "Desktop")
+    unique_filename = get_unique_filename(desktop_path, output_name.replace('.zip', '') + '.zip')
+    output_path = path.join(desktop_path, unique_filename.replace('.zip', ''))
     shutil.make_archive(output_path, "zip", temp_dir)
     shutil.rmtree(temp_dir)
-    print(phrase('compression_complete'))
+    print(phrase('compression_complete', filename=unique_filename))
 
 @click.command()
 def makeCLI():
@@ -52,10 +66,10 @@ def makeCLI():
         shutil.rmtree(TEMP_DIR)
     except FileNotFoundError:
         pass
-    
+
     print(phrase('welcome'))
     click.echo(phrase('choose_mode'))
-    
+
     mode = click.getchar()
 
     match mode:
