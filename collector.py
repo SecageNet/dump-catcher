@@ -11,7 +11,9 @@ from json import load
 TEMP_DIR = path.join(path.expanduser("~"),"AppData","Local","Temp","SystemInformationReports")
 
 def load_phrases():
-    with open('phrases.json', 'r', encoding='utf-8') as f:
+    base_path = getattr(sys, '_MEIPASS', path.abspath("."))
+    phrases_path = path.join(base_path, 'phrases.json')
+    with open(phrases_path, 'r', encoding='utf-8') as f:
         return load(f)
 
 phrases = load_phrases()
