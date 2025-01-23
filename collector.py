@@ -138,65 +138,66 @@ def makeCLI():
     
     mode = click.getchar()
 
-    if mode == '1':
-        print(phrase('basic_mode'))
-        
-        minidump_files = glob.glob("C:\\Windows\\Minidump\\*.dmp")
-        
-        if not minidump_files:
-            print(phrase('no_minidump'))
-        else:
+    match mode:
+        case '1':
+            print(phrase('basic_mode'))
+
+            minidump_files = glob.glob("C:\\Windows\\Minidump\\*.dmp")
+
+            if not minidump_files:
+                print(phrase('no_minidump'))
+            else:
+                mkdir(TEMP_DIR)
+                compress_and_clean(TEMP_DIR, REPORT_ZIP)
+
+        case '2':
+            print(phrase('advanced_mode'))
+            custom_pause(phrase('pause_message'))
+            click.clear()
+
             mkdir(TEMP_DIR)
+
+            with ThreadPoolExecutor() as executor:
+                dxdiag_command = f'dxdiag /t {TEMP_DIR}\\dxdiag_backup.txt'
+                wevutil_command = f'wevtutil epl System {TEMP_DIR}\\System.evtx'
+                msinfo_command = f'msinfo32 /nfo {TEMP_DIR}\\msinfo32.nfo'
+                driverquery_command = (
+                    f'driverquery /V > {TEMP_DIR}\\driverV.txt && '
+                    f'driverquery /fo csv > {TEMP_DIR}\\driverFo.txt && '
+                    f'driverquery /si > {TEMP_DIR}\\driverSi.txt'
+                )
+                dxdiag_future = executor.submit(run_subprocess, dxdiag_command)
+                wevutil_future = executor.submit(run_subprocess, wevutil_command)
+                msinfo_future = executor.submit(run_subprocess, msinfo_command)
+                driverquery_future = executor.submit(run_subprocess, driverquery_command)
+
+                print(phrase('dxdiag_collecting'))
+                dxdiag_future.result()
+                print(phrase('dxdiag_success'))
+
+                print(phrase('driver_collecting'))
+                driverquery_future.result()
+                print(phrase('driver_success'))
+
+                print(phrase('msinfo_collecting'))
+                msinfo_future.result()
+                print(phrase('msinfo_success'))
+
+            shutil.copyfile("C:\\Windows\\System32\\drivers\\etc\\hosts", f'{TEMP_DIR}\\hosts.txt')
+            print(phrase('hosts_success'))
+
+            minidump_files = glob.glob("C:\\Windows\\Minidump\\*.dmp")
+            if not minidump_files:
+                print(phrase('no_minidump'))
+            else:
+                with ThreadPoolExecutor() as file_executor:
+                    file_executor.map(lambda file: shutil.copyfile(file, f'{TEMP_DIR}\\{path.basename(file)}'), minidump_files)
+                print(phrase('minidump_success'))
             compress_and_clean(TEMP_DIR, REPORT_ZIP)
 
-    elif mode == '2':
-        print(phrase('advanced_mode'))
-        custom_pause(phrase('pause_message'))
-        click.clear()
-
-        mkdir(TEMP_DIR)
-
-        with ThreadPoolExecutor() as executor:
-            dxdiag_command = f'dxdiag /t {TEMP_DIR}\\dxdiag_backup.txt'
-            wevutil_command = f'wevtutil epl System {TEMP_DIR}\\System.evtx'
-            msinfo_command = f'msinfo32 /nfo {TEMP_DIR}\\msinfo32.nfo'
-            driverquery_command = (
-                f'driverquery /V > {TEMP_DIR}\\driverV.txt && '
-                f'driverquery /fo csv > {TEMP_DIR}\\driverFo.txt && '
-                f'driverquery /si > {TEMP_DIR}\\driverSi.txt'
-            )
-            dxdiag_future = executor.submit(run_subprocess, dxdiag_command)
-            wevutil_future = executor.submit(run_subprocess, wevutil_command)
-            msinfo_future = executor.submit(run_subprocess, msinfo_command)
-            driverquery_future = executor.submit(run_subprocess, driverquery_command)
-
-            print(phrase('dxdiag_collecting'))
-            dxdiag_future.result()
-            print(phrase('dxdiag_success'))
-
-            print(phrase('driver_collecting'))
-            driverquery_future.result()
-            print(phrase('driver_success'))
-
-            print(phrase('msinfo_collecting'))
-            msinfo_future.result()
-            print(phrase('msinfo_success'))
-
-        shutil.copyfile("C:\\Windows\\System32\\drivers\\etc\\hosts", f'{TEMP_DIR}\\hosts.txt')
-        print(phrase('hosts_success'))
-
-        minidump_files = glob.glob("C:\\Windows\\Minidump\\*.dmp")
-        if not minidump_files:
-            print(phrase('no_minidump'))
-        else:
-            with ThreadPoolExecutor() as file_executor:
-                file_executor.map(lambda file: shutil.copyfile(file, f'{TEMP_DIR}\\{path.basename(file)}'), minidump_files)
-            print(phrase('minidump_success'))
-        compress_and_clean(TEMP_DIR, REPORT_ZIP)
-
-    else:
-        print(phrase('invalid_selection'))
-        sys.exit(0)
+        case _:
+            print(phrase('invalid_selection'))
+            sys.exit(0)
 
     custom_pause(phrase('end_message'))
 
