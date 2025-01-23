@@ -1,0 +1,86 @@
+{
+    "welcome": {
+        "tr": "Sistem Bilgisi Toplayıcıya hoş geldiniz!",
+        "en": "Welcome to the System Information Collector!"
+    },
+    "choose_mode": {
+        "tr": "\nMod seçin: Basit Mod için (1), Gelişmiş Mod için (2) tuşlayın",
+        "en": "\nChoose a mode: Press (1) for Simple Mode, (2) for Advanced Mode"
+    },
+    "invalid_selection": {
+        "tr": "\nGeçersiz seçim yapıldı. Program sonlandırılıyor.",
+        "en": "\nInvalid selection. The program is terminating."
+    },
+    "basic_mode": {
+        "tr": "\nBasit Mod seçildi: Sadece minidump dosyaları toplanacak.",
+        "en": "\nSimple Mode selected: Only minidump files will be collected."
+    },
+    "no_minidump": {
+        "tr": "\nMinidump dosyaları bulunamadı.",
+        "en": "\nNo minidump files found."
+    },
+    "minidump_success": {
+        "tr": "\nMinidump dosyaları başarıyla alındı.",
+        "en": "\nMinidump files were successfully collected."
+    },
+    "compressing": {
+        "tr": "\nDosyalar sıkıştırılıyor...",
+        "en": "\nFiles are being compressed..."
+    },
+    "compression_complete": {
+        "tr": "\nDosyalar sıkıştırıldı ve ZIP dosyası masaüstüne \"Raporlar.zip\" şeklinde kaydedildi.",
+        "en": "\nFiles compressed and the ZIP file was saved to the desktop as \"Reports.zip\"."
+    },
+    "advanced_mode": {
+        "tr": "\nGelişmiş Mod seçildi.",
+        "en": "\nAdvanced Mode selected."
+    },
+    "pause_message": {
+        "tr": "\nLütfen devam etmek için herhangi bir tuşa tıklayın veya \"q\" ile çıkın...",
+        "en": "\nPlease press any key to continue or \"q\" to quit..."
+    },
+    "hosts_success": {
+        "tr": "\nHosts dosyası alındı.",
+        "en": "\nHosts file collected."
+    },
+    "process_error": {
+        "tr": "\nİşlem başarısız oldu.",
+        "en": "\nProcess failed."
+    },
+    "goodbye": {
+        "tr": "\nÇıkış yapılıyor...",
+        "en": "\nExiting..."
+    },
+    "report_filename": {
+        "tr": "Raporlar.zip",
+        "en": "Reports.zip"
+    },
+    "dxdiag_collecting": {
+        "tr": "\nDxDiag çıktısı alınıyor...",
+        "en": "\nCollecting DxDiag output..."
+    },
+    "dxdiag_success": {
+        "tr": "\nDxDiag çıktısı alındı.",
+        "en": "\nDxDiag output collected."
+    },
+    "driver_collecting": {
+        "tr": "\nSürücü listesi alınıyor...",
+        "en": "\nCollecting driver list..."
+    },
+    "driver_success": {
+        "tr": "\nSürücü listesi alındı.",
+        "en": "\nDriver list collected."
+    },
+    "msinfo_collecting": {
+        "tr": "\nMsinfo32 çıktısı alınıyor...",
+        "en": "\nCollecting Msinfo32 output..."
+    },
+    "msinfo_success": {
+        "tr": "\nMsinfo32 çıktısı alındı.",
+        "en": "\nMsinfo32 output collected."
+    },
+    "end_message": {
+        "tr": "\nLütfen işlemi sonlandırmak için herhangi bir tuşa tıklayın.",
+        "en": "\nPlease press any key to terminate the process."
+    }
+}
